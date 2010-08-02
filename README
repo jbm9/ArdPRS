@@ -1,0 +1,21 @@
+This is an implementation of APRS transmission for the Arduino-ish environment.  Please be aware that it's full of low-level gotchas, breaks delay(), and generally isn't entirely approachable.  You probably dont' want to use this unless you're feeling pretty confident about the idea of working on a softmodem yourself, at least not in its current incarnation.
+
+Also, don't take these to be coding examples.  This is some ugly, gnarly stuff, and only half of that ugliness is warranted.  Cleanups are the last phase of research code; if you would like to help clean up this code, please submit patches, but be aware that the goal is to move the code into a much cleaner form, not just move the ugly around.
+
+Now that we've scared off most folks, hi!  Welcome to a tour-de-force of kludges!  There's some crazy stuff in here, but the key thing is to just glance at the examples.
+
+Steps to happiness and success with ArdPRS:
+
+- Build your 1b DAC as documented in FSK.h
+- #define CALLSIGN before including ArdPRS.h
+- Floss regularly
+- You'll want a long coax feed to your antenna.  RFI sucks.
+
+The code is in a real state; it needs a lot of cleanup.  The biggest priority is changing the waveform generation to fully embrace the 1b DAC.  The current code uses some crufty old 4b DAC, complete with a small lookup table of sine values.  Most likely, this can all be ripped out and replaced with a much simpler tone swapping routine that does the same sort of high/low banging the Tone library uses.
+
+Otherwise... the HDLC framing looks to be pretty good, but could always use formal tests around it.  There's an option to compile for the CLI, which is sorta helpful, though it may not currently work.
+
+Happy hacking,
+/jbm
+
+
